@@ -5,12 +5,15 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { NavBar } from './components/navbar/NavBar';
 import { NavBarItem } from './components/navbar/NavBarItem';
 import { ClassroomList } from './components/classroom/ClassroomList';
-import { CourseList } from './components/course/CourseList';
-import { ProfessorList } from './components/professor/ProfessorList';
-import { ProfessorAssigments } from './components/professor/ProfessorAssigments';
+import { CourseList } from './pages/course/CourseList';
+
 import { Card } from './components/common/Card';
 import { Kpi } from './components/kpi/Kpi';
-import { Spinner } from './components/common/Spinner';
+import { StudentsList } from './pages/students/StudentsList';
+import { ProfessorAssigments } from './pages/professor/ProfessorAssigments';
+import { ProfessorList } from './pages/professor/ProfessorList';
+import { StudentAssigment } from './pages/students/StudentAssigment';
+import { UploadData } from './pages/upload/UploadData';
 
 
 function Home() {
@@ -42,8 +45,9 @@ function App() {
       <NavBarItem title={'Salones'} href={'classrooms'} />
       <NavBarItem title={'Cursos'} href={"courses"} />
       <NavBarItem title={'Maestros'} href={"professor"} />
-      <NavBarItem title={'Metricas'} href={"kpi"} />
-      
+      <NavBarItem title={'Estudiantes'} href={"/students"} />
+      <NavBarItem title={'Metricas'} href={"/kpi"} />
+      <NavBarItem title={'Carga de archivos'} href={"/upload"} />
     </NavBar>
     
 
@@ -54,9 +58,10 @@ function App() {
         <Route path="/courses" element={<CourseList />} />
         <Route path="/professor" element={<ProfessorList />} />
         <Route path="/professor/:cui" element={<ProfessorAssigments />} />
+        <Route path="/students" element={<StudentsList />} />
+        <Route path="/students/:id" element={<StudentAssigment />} />
         <Route path="/kpi" element={<Kpi />} />
-
-
+        <Route path="/upload" element={<UploadData />} />
       </Routes>
     </Router>
 

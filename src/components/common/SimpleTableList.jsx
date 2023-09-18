@@ -42,7 +42,7 @@ export const SimpleTableList = ({ url, headers, edit, remove, keys, reload, onDe
 
                         {detail &&
                             <th scope="col" className="px-6 py-3">
-                                <span className="sr-only">Detalle</span>
+                                <span className="sr-only">Asignaciones</span>
                             </th>
                         }
                     </tr>
@@ -84,7 +84,7 @@ export const SimpleTableList = ({ url, headers, edit, remove, keys, reload, onDe
                                     detail &&
                                     <td className="px-6 py-4 text-right">
                                         <a href={`${detail}/${el[key_ref]}`} className="font-medium text-blue-600 dark:text-blue-500 hover:underline">
-                                            Detalle
+                                            Asignaciones
                                         </a>
                                     </td>
                                 }

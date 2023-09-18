@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Table } from '../common/Table';
-import { Modal } from '../common/Modal';
+import { Modal } from '../../components/common/Modal';
 import { useForm } from '../../hooks/useForm';
+import { Table } from '../../components/common/Table'
+
 
 const backendURL = process.env.REACT_APP_BACKEND_URL;
 

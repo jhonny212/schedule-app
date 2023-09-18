@@ -1,9 +1,11 @@
 import React from 'react'
-import { SimpleTableList } from '../common/SimpleTableList'
+
 import { useState } from 'react';
 
-import { Modal } from '../common/Modal';
+
 import { useForm } from '../../hooks/useForm';
+import { SimpleTableList } from '../../components/common/SimpleTableList';
+import { Modal } from '../../components/common/Modal';
 
 const backendURL = process.env.REACT_APP_BACKEND_URL;
 

@@ -1,6 +1,6 @@
 import React from 'react'
-import { SimpleTableList } from '../common/SimpleTableList'
-import { Modal } from '../common/Modal'
+import { SimpleTableList } from '../../components/common/SimpleTableList'
+import { Modal } from '../../components/common/Modal'
 import { useState } from 'react';
 import { useForm } from '../../hooks/useForm';
 
@@ -9,7 +9,10 @@ const backendURL = process.env.REACT_APP_BACKEND_URL;
 export const CourseList = () => {
   const [isActive, setisActive] = useState(false);
   const [updateForm, setupdateForm] = useState(false);
-  const { name, semester, onResetForm, forceChange, formState, onInputChange, bulkForceChange } = useForm({ name: '', semester: 0, id: -1 })
+  const [careers, setCareers] = useState([])
+  const { name, semester,id,id_career, onResetForm, forceChange, formState, onInputChange, bulkForceChange } = useForm(
+    { name: '', semester: 0, id: -1,id_career:-1 }
+  )
 
   const onDelete = (id) => {
     fetch(backendURL + "courses", {
@@ -36,8 +39,17 @@ export const CourseList = () => {
       })
   }
 
-  const onEdit = (item) => {
+  const getCareers = async (pk)=>{
+    const data = await (await fetch(backendURL + `career`)).json()
+    const career = await (await fetch(backendURL + `career/${pk}`)).json()
+    setCareers(data)
+    return career ? career.code : -1
+  }
+
+  const onEdit = async (item) => {
     setisActive(true)
+    const code = await getCareers(item[0].id)
+    item[0].id_career = code
     bulkForceChange(item[0])
   }
 
@@ -99,6 +111,19 @@ export const CourseList = () => {
               Semestre
             </label>
           </div>
+
+          <select name="id_career" id="id_career"
+            onChange={(ev) => onInputChange(ev)}
+            value={id_career}
+            className='block w-full p-2 mb-6 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+          >
+            <option key="-1" value={-1}>Seleccione una carrera</option>
+            {careers.map(el => {
+              return (
+                <option key={el.code} value={el.code}>{el.name}</option>
+              )
+            })}
+          </select>
 
           <button type="submit" className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 ">
             Confirmar
